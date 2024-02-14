@@ -1,6 +1,4 @@
-@{
-    ViewData["Title"] = "Category";
-}
+@model List<Category>
 <h1>@ViewData["Title"]</h1>
 
 <p>Here you can see your all categories.</p>
@@ -8,5 +6,31 @@
 <div class="row">
     <div class="col-md-12">
         <a class="btn btn-outline-dark" asp-controller="Category" asp-action="Create">New Category</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Display Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var i in Model)
+                    {
+                        <tr>
+                            <td>@i.Id</td>
+                            <td>@i.Name</td>
+                            <td>@i.DisplayOrder</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
