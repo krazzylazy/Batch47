@@ -18,6 +18,7 @@
                         <th>ID</th>
                         <th>Name</th>
                         <th>Display Order</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,9 @@
                             <td>@i.Id</td>
                             <td>@i.Name</td>
                             <td>@i.DisplayOrder</td>
+                            <td>
+                                <a class="text-info" asp-action="Edit" asp-controller="Category" asp-route-id="@i.Id">Edit</a>
+                            </td>
                         </tr>
                     }
                 </tbody>

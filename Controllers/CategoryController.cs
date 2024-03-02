@@ -10,10 +10,11 @@ namespace Batch47.Controllers
 		{
 			_db = db;
 		}
-
+		
 		public IActionResult Index()
 		{
 			ViewData["Title"] = "Category";
+			// ORM => Object Relational Mapping
 			List<Category> categories = _db.Categories.ToList();
 			return View(categories);
 		}
@@ -29,13 +30,25 @@ namespace Batch47.Controllers
 		public IActionResult Create(Category cat)
 		{
 			_db.Categories.Add(cat);
-			_db.SaveChanges();		// While INSERT/UPDATE/DELETE
-			return Redirect("Index");
+			_db.SaveChanges();      // While INSERT/UPDATE/DELETE
+			return RedirectToAction("Index");
 		}
 
-		public IActionResult Edit()
+		[HttpGet]
+		public IActionResult Edit(int? Id)
 		{
-			return View();
+			// select * from Categories where Id = 1 limit 1
+			Category? cat = _db.Categories.Where(u => u.Id == Id).FirstOrDefault();
+			ViewData["Title"] = "Update " + cat.Name + " details";
+			return View(cat);
+		}
+
+		[HttpPost]
+		public IActionResult Edit(Category cat)
+		{
+			_db.Categories.Update(cat);
+			_db.SaveChanges();      // While INSERT/UPDATE/DELETE
+			return RedirectToAction("Index");
 		}
 	}
 }
